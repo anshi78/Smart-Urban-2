@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Urban Settlement Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color:rgb(170, 30, 77);;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color:rgb(85, 87, 183);
+        }
+
+        section {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color:rgb(121, 0, 34);
+        }
+
+        div {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(121, 0, 0, 0.1);
+        }
+
+        div h3 {
+            margin-top: 0;
+            color:rgb(121, 0, 34));
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color:rgb(36, 77, 0);
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color:rgb(170, 30, 77);
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-top: 15px;
+            color: #333;
+        }
+
+        img {
+            max-width: 100%;
+            margin-top: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color::rgb(34, 170, 30);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Smart Urban Settlement Management</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Real-Time Predictions</h2>
+
+        <!-- Air Quality Prediction Form -->
+        <div>
+            <h3>Air Quality Prediction</h3>
+            <form action="/predict/air_quality" method="POST">
+                <label for="Country">Country:</label>
+                <input type="text" id="Country" name="Country" placeholder="Enter country" required>
+
+                <label for="Status">Status:</label>
+                <input type="text" id="Status" name="Status" placeholder="Enter status" required>
+
+                <label for="year">Year:</label>
+                <input type="number" id="year" name="year" placeholder="Enter year" required>
+
+                <label for="month">Month:</label>
+                <input type="number" id="month" name="month" placeholder="Enter month" required>
+
+                <label for="day">Day:</label>
+                <input type="number" id="day" name="day" placeholder="Enter day" required>
+
+                <button type="submit">Get Prediction</button>
+            </form>
+            {% if air_quality_prediction %}
+            <p><strong>Prediction:</strong> {{ air_quality_prediction }}</p>
+            <img src="{{ url_for('static', filename='images/actual_vs_predicted.png') }}" alt="Air Quality Plot">
+            {% endif %}
+        </div>
+
+        <!-- Traffic Congestion Prediction Form -->
+        <div>
+            <h3>Traffic Congestion Prediction</h3>
+            <form action="/predict/traffic" method="POST">
+                <label for="hour">Hour of the Day (0-23):</label>
+                <input type="number" id="hour" name="hour" min="0" max="23" placeholder="Enter hour" required>
+
+                <label for="day_of_week">Day of the Week (0=Monday, ..., 6=Sunday):</label>
+                <input type="number" id="day_of_week" name="day_of_week" min="0" max="6" placeholder="Enter day" required>
+
+                <button type="submit">Get Prediction</button>
+            </form>
+            {% if traffic_prediction %}
+            <p><strong>Prediction:</strong> {{ traffic_prediction }}</p>
+            <img src="{{ url_for('static', filename='images/actual_vs_predicted_congestion.png') }}" alt="Traffic Plot">
+            {% endif %}
+        </div>
+
+      
+        <div>
+            <h3>Affordable Housing Prediction</h3>
+            <form action="/predict/housing" method="POST">
+                <label for="population_density">Population Density:</label>
+                <input type="number" id="population_density" name="population_density" placeholder="Enter population density" required>
+
+                <label for="average_income">Average Income:</label>
+                <input type="number" id="average_income" name="average_income" placeholder="Enter average income" required>
+
+                <button type="submit">Get Prediction</button>
+            </form>
+            {% if housing_prediction %}
+            <p><strong>Prediction:</strong> {{ housing_prediction }}</p>
+            <img src="{{ url_for('static', filename='images/housing_demand_plot.png') }}" alt="Housing Plot">
+            {% endif %}
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Smart Urban Management</p>
+    </footer>
+</body>
+</html>
