@@ -1,0 +1,74 @@
+{
+    "device_id": "CAM001",
+    "device_name": "Forest Camera 1",
+    "location": "North Forest Trail",
+    "model": "WildlifeCam Pro",
+    "firmware_version": "2.1.0",
+    
+    "camera_settings": {
+        "camera_index": 0,
+        "resolution": [1280, 720],
+        "fps": 30,
+        "auto_exposure": true,
+        "brightness": 50,
+        "contrast": 50,
+        "saturation": 50
+    },
+    
+    "detection_settings": {
+        "model_path": "models/wildlife_detection.pt",
+        "confidence_threshold": 0.5,
+        "nms_threshold": 0.4,
+        "input_size": [640, 640],
+        "classes": [
+            "elephant", "tiger", "leopard", "bear", "deer", 
+            "monkey", "bird", "snake", "crocodile", "rhino"
+        ],
+        "detection_interval": 1.0,
+        "save_detections": true,
+        "upload_detections": true
+    },
+    
+    "storage_settings": {
+        "max_storage_gb": 10,
+        "cleanup_older_than_days": 7,
+        "image_quality": 85,
+        "video_codec": "mp4v",
+        "video_fps": 15
+    },
+    
+    "network_settings": {
+        "backend_url": "http://192.168.1.100:5000",
+        "upload_enabled": true,
+        "heartbeat_interval": 30,
+        "retry_attempts": 3,
+        "timeout_seconds": 30,
+        "wifi_ssid": "WildlifeNetwork",
+        "wifi_password": "secure_password"
+    },
+    
+    "power_management": {
+        "low_power_mode": false,
+        "sleep_schedule": {
+            "enabled": false,
+            "sleep_start": "22:00",
+            "wake_time": "06:00"
+        },
+        "battery_threshold": 20
+    },
+    
+    "alerts": {
+        "species_alerts": ["elephant", "tiger", "leopard"],
+        "motion_detection": true,
+        "sound_detection": false,
+        "email_notifications": false,
+        "sms_notifications": false
+    },
+    
+    "logging": {
+        "level": "INFO",
+        "max_log_size_mb": 50,
+        "log_rotation": true,
+        "remote_logging": true
+    }
+}
