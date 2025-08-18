@@ -1,0 +1,52 @@
+{
+  "device": {
+    "device_id": "CAM001",
+    "name": "Forest Trail Camera 1",
+    "location": "North Forest Trail",
+    "latitude": 45.5231,
+    "longitude": -122.6765
+  },
+  "camera": {
+    "resolution": [1920, 1080],
+    "fps": 30,
+    "rotation": 0,
+    "brightness": 50,
+    "contrast": 50,
+    "saturation": 50,
+    "gain": 0
+  },
+  "detection": {
+    "confidence_threshold": 0.5,
+    "nms_threshold": 0.4,
+    "model_path": "../model/wildlife_detection_model.onnx",
+    "classes": ["deer", "bear", "coyote", "fox", "raccoon", "human"],
+    "max_detections": 10,
+    "motion_threshold": 0.1,
+    "min_motion_area": 500
+  },
+  "storage": {
+    "local_storage_path": "./detections",
+    "max_local_storage_mb": 1024,
+    "compression_quality": 85,
+    "retention_days": 30
+  },
+  "cloud": {
+    "api_url": "http://localhost:5000/api",
+    "sync_interval_seconds": 300,
+    "batch_size": 10,
+    "timeout_seconds": 30,
+    "retry_attempts": 3
+  },
+  "logging": {
+    "level": "INFO",
+    "file_path": "./logs/edge_device.log",
+    "max_file_size_mb": 10,
+    "backup_count": 5
+  },
+  "power": {
+    "sleep_mode": false,
+    "sleep_interval_seconds": 60,
+    "wake_on_motion": true,
+    "low_power_mode": false
+  }
+}
